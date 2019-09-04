@@ -1,0 +1,116 @@
+unit uFrmMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Win.ScktComp, MsgCommon,
+  Vcl.StdCtrls;
+
+type
+  TFrmMain = class(TForm)
+    srvSocket: TServerSocket;
+    mmoLog: TMemo;
+    procedure FormCreate(Sender: TObject);
+    procedure srvSocketClientConnect(Sender: TObject; Socket: TCustomWinSocket);
+    procedure srvSocketClientDisconnect(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure srvSocketClientRead(Sender: TObject; Socket: TCustomWinSocket);
+  private
+    { Private declarations }
+    FRecvText: AnsiString;
+
+    procedure AddLog(S: string);
+
+    procedure RecvPacked(MsgHeader: PSockMsgHeader; Data: PByte; DataLen: LongWord);
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmMain: TFrmMain;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrmMain.AddLog(S: string);
+begin
+  mmoLog.Lines.Add(S);
+end;
+
+procedure TFrmMain.FormCreate(Sender: TObject);
+begin
+  srvSocket.Port := SERVER_PORT;
+  try
+    SrvSocket.Active := True;
+    AddLog('服务器已启动:' + IntToStr(SERVER_PORT));
+  except
+    on E: Exception do
+    begin
+      AddLog('服务器启动失败;' + E.Message);
+    end;
+  end;
+end;
+
+procedure TFrmMain.RecvPacked(MsgHeader: PSockMsgHeader; Data: PByte;
+  DataLen: LongWord);
+var
+  ClientMsgLogin: PClientMsgLogin;
+begin
+  case MsgHeader.Cmd of
+    CM_LOGIN:
+      begin
+        ClientMsgLogin := PClientMsgLogin(Data);
+        AddLog(Format('用户名: %s;  密码: %s', [ClientMsgLogin.UserName, ClientMsgLogin.Password]));
+      end;
+  end;
+end;
+
+procedure TFrmMain.srvSocketClientConnect(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+  AddLog('客户端连接: ' + Socket.RemoteAddress);
+end;
+
+procedure TFrmMain.srvSocketClientDisconnect(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+  AddLog('客户端断开: ' + Socket.RemoteAddress);
+end;
+
+procedure TFrmMain.srvSocketClientRead(Sender: TObject;
+  Socket: TCustomWinSocket);
+var
+  Header: PSockMsgHeader;
+  pData: PByte;
+begin
+  FRecvText := FRecvText + Socket.ReceiveText;
+
+  while True do
+  begin
+    if Length(FRecvText) < SOCKET_HERADE_LEN then Exit;
+
+    Header := @FRecvText[1];
+
+    if Header.Flag <> SOCK_HEADER_FLAG then
+    begin
+      Socket.Close;
+      Exit;
+    end;
+
+    if Length(FRecvText) < SOCKET_HERADE_LEN + Header.DataLen then Exit;
+
+    if Header.DataLen > 0 then
+      pData := @FRecvText[1 + SOCKET_HERADE_LEN]
+    else
+      pData := nil;
+
+    RecvPacked(Header, pData, Header.DataLen);
+
+    // 丢弃前面处理过的包
+    FRecvText := Copy(FRecvText, 1 + SOCKET_HERADE_LEN + Header.DataLen, MaxInt);
+  end;
+end;
+
+end.

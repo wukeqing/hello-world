@@ -1,0 +1,84 @@
+unit uFrmMain;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, System.Win.ScktComp, MsgCommon,
+  Vcl.StdCtrls;
+
+type
+  TFrmMain = class(TForm)
+    srvSocket: TServerSocket;
+    mmoLog: TMemo;
+    procedure FormCreate(Sender: TObject);
+    procedure srvSocketClientConnect(Sender: TObject; Socket: TCustomWinSocket);
+    procedure srvSocketClientDisconnect(Sender: TObject;
+      Socket: TCustomWinSocket);
+    procedure srvSocketClientRead(Sender: TObject; Socket: TCustomWinSocket);
+  private
+    { Private declarations }
+    FRecvText: AnsiString;
+
+    procedure AddLog(S: string);
+  public
+    { Public declarations }
+  end;
+
+var
+  FrmMain: TFrmMain;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFrmMain.AddLog(S: string);
+begin
+  mmoLog.Lines.Add(S);
+end;
+
+procedure TFrmMain.FormCreate(Sender: TObject);
+begin
+  srvSocket.Port := SERVER_PORT;
+  try
+    SrvSocket.Active := True;
+    AddLog('服务器已启动:' + IntToStr(SERVER_PORT));
+  except
+    on E: Exception do
+    begin
+      AddLog('服务器启动失败;' + E.Message);
+    end;
+  end;
+end;
+
+procedure TFrmMain.srvSocketClientConnect(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+  AddLog('客户端连接: ' + Socket.RemoteAddress);
+end;
+
+procedure TFrmMain.srvSocketClientDisconnect(Sender: TObject;
+  Socket: TCustomWinSocket);
+begin
+  AddLog('客户端断开: ' + Socket.RemoteAddress);
+end;
+
+procedure TFrmMain.srvSocketClientRead(Sender: TObject;
+  Socket: TCustomWinSocket);
+var
+  Header: PSockMsgHeader;
+begin
+  FRecvText := FRecvText + Socket.ReceiveText;
+
+  if Length(FRecvText) < SizeOf(TSockMsgHeader) then Exit;
+
+  Header := @FRecvText[1];
+
+  if Length(FRecvText) < Size( then
+
+
+
+  Socket.SendBuf()
+end;
+
+end.

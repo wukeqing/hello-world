@@ -1,0 +1,19 @@
+unit MsgCommon;
+
+interface
+
+const
+  SERVER_PORT = 6767;
+  SERVER_ADDR = '127.0.0.1';
+
+type
+  TSockMsgHeader = packed record
+    Flag: LongWord;       // °ü±ê¼Ç
+    Cmd: Word;
+    Param1: Word;
+    DataLen: LongWord;
+  end;
+
+implementation
+
+end.

@@ -1,0 +1,28 @@
+unit uSession;
+
+interface
+
+type
+  PSession = ^TSession;
+  TSession = record
+    SessionID: LongWord;
+    UserName: string;
+    ContextTick: LongWord;
+  end;
+
+var
+  g_Sessions: array[0..2999] of TSession;
+
+implementation
+
+procedure Init_g_Sessions;
+begin
+  FillChar(g_Sessions, SizeOf(g_Sessions), 0);
+end;
+
+procedure ClearSession(Session: PSession);
+begin
+  FillChar(Session^, SizeOf(TSession), 0);
+end;
+
+end.

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2019/09/04 16:34:12.184,=C:\Users\huange\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/09/04 16:34:36.137,C:\Users\huange\Desktop\ChatDemo\Client\uFrmMain.dfm=C:\Users\huange\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2019/09/04 16:34:36.137,C:\Users\huange\Desktop\ChatDemo\Client\uFrmMain.pas=C:\Users\huange\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/09/04 16:34:41.197,C:\Users\huange\Desktop\ChatDemo\Client\ChatClient.dproj=C:\Users\huange\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2019/09/04 16:35:23.597,=C:\Users\huange\Desktop\ChatDemo\Common\MsgCommon.pas</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2019/09/04 16:20:03.178,=C:\Users\huange\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/09/04 16:21:22.543,C:\Users\huange\Desktop\ChatDemo\Server\uFrmMain.pas=C:\Users\huange\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2019/09/04 16:21:22.543,C:\Users\huange\Desktop\ChatDemo\Server\uFrmMain.dfm=C:\Users\huange\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2019/09/04 16:21:33.118,C:\Users\huange\Desktop\ChatDemo\Server\ChatServer.dproj=C:\Users\huange\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2019/09/04 16:21:58.646,=C:\Users\huange\Desktop\ChatDemo\Server\Unit1.pas</Transaction>
+    <Transaction>2019/09/04 16:22:10.828,C:\Users\huange\Desktop\ChatDemo\Server\uFrmSetting.dfm=C:\Users\huange\Desktop\ChatDemo\Server\Unit1.dfm</Transaction>
+    <Transaction>2019/09/04 16:22:10.828,C:\Users\huange\Desktop\ChatDemo\Server\uFrmSetting.pas=C:\Users\huange\Desktop\ChatDemo\Server\Unit1.pas</Transaction>
+    <Transaction>2019/09/04 16:26:00.302,=C:\Users\huange\Desktop\ChatDemo\Server\Unit1.pas</Transaction>
+    <Transaction>2019/09/04 16:26:50.414,C:\Users\huange\Desktop\ChatDemo\Common\MsgCommon.pas=C:\Users\huange\Desktop\ChatDemo\Server\Unit1.pas</Transaction>
+    <Transaction>2019/09/04 17:50:17.817,=C:\Users\huange\Desktop\ChatDemo\Server\Unit1.pas</Transaction>
+    <Transaction>2019/09/04 17:50:30.809,C:\Users\huange\Desktop\ChatDemo\Server\uSession.pas=C:\Users\huange\Desktop\ChatDemo\Server\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

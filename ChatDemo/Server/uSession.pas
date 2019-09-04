@@ -1,0 +1,38 @@
+unit uSession;
+
+interface
+
+uses
+  ScktComp;
+
+type
+  PSession = ^TSession;
+  TSession = record
+    Socket: TCustomWinSocket;
+    UserName: string;
+    ContextTick: LongWord;
+
+    RecvText: AnsiString;
+  end;
+
+var
+  g_Sessions: array[0..2999] of TSession;
+
+  procedure Init_g_Sessions;
+  procedure ResetSession(Session: PSession);
+
+implementation
+
+procedure Init_g_Sessions;
+begin
+  FillChar(g_Sessions, SizeOf(g_Sessions), 0);
+end;
+
+procedure ResetSession(Session: PSession);
+begin
+  Session.UserName := '';
+  Session.RecvText := '';
+  FillChar(Session^, SizeOf(TSession), 0);
+end;
+
+end.
